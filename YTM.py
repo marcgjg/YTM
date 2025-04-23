@@ -391,22 +391,25 @@ with col2:
     
     st.plotly_chart(fig, use_container_width=True)
     
-    # Add a table showing the current bond's price-yield data directly (not in an expander)
-    st.markdown("<h3>Price-Yield Data Table</h3>", unsafe_allow_html=True)
+    # Add a table showing bond prices at specific YTM increments
+    st.markdown("<h3>Bond Price at Different Yields</h3>", unsafe_allow_html=True)
     
-    # Create a dataframe with sample points (not all points to keep the table manageable)
-    sample_step = max(1, len(yields) // 20)  # Take about 20 points
-    sample_yields = yields[::sample_step] * 100
-    sample_prices = prices[::sample_step]
+    # Create specific yield points from 0% to 20% in 0.5% increments
+    specific_yields = np.arange(0, 20.5, 0.5) / 100  # Convert to decimal
+    specific_prices = []
     
-    # Create a simple DataFrame
+    # Calculate bond prices for each specific yield
+    for ytm in specific_yields:
+        price = calculate_bond_price(ytm)
+        specific_prices.append(price)
+    
+    # Create a DataFrame with the data
     price_data = pd.DataFrame({
-        "Yield to Maturity (%)": sample_yields,
-        "Bond Price (€)": sample_prices
+        "Yield to Maturity (%)": specific_yields * 100,
+        "Bond Price (€)": specific_prices
     })
     
-    # Apply basic formatting
-    price_data["Yield to Maturity (%)"] = price_data["Yield to Maturity (%)"].round(2)
+    # Format the numbers for display
     price_data["Bond Price (€)"] = price_data["Bond Price (€)"].round(2)
     
     # Display the table
