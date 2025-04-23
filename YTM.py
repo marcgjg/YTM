@@ -5,6 +5,11 @@ import matplotlib.pyplot as plt
 # Set the title
 st.title("Bond Price vs Yield to Maturity")
 
+# Initialize session state to store curves
+if 'curves' not in st.session_state:
+    st.session_state.curves = []
+    st.session_state.last_maturity = None
+
 # Sidebar inputs
 st.sidebar.header("Bond Parameters")
 
@@ -16,6 +21,9 @@ coupon_frequency = st.sidebar.selectbox("Coupon Frequency", ["Annual", "Semi-Ann
 
 # Remaining maturity input (0.5 to 30 years in 0.5-year steps)
 maturity = st.sidebar.slider("Maturity (Years)", min_value=0.5, max_value=30.0, value=10.0, step=0.5)
+
+# Reset button
+reset = st.sidebar.button("Reset Chart")
 
 # Constants
 face_value = 100
@@ -42,13 +50,22 @@ for ytm in yields:
     price = calculate_bond_price(ytm)
     prices.append(price)
 
+# Reset or update curves
+if reset or (st.session_state.last_maturity is not None and st.session_state.last_maturity != maturity):
+    st.session_state.curves = []
+st.session_state.curves.append((yields * 100, prices, f"{coupon_rate:.2f}% - {coupon_frequency} - {maturity:.1f}y"))
+st.session_state.last_maturity = maturity
+
 # Plot
 fig, ax = plt.subplots()
-ax.plot(yields * 100, prices)
+for x_vals, y_vals, label in st.session_state.curves:
+    ax.plot(x_vals, y_vals, label=label)
+
 ax.set_title("Bond Price vs Yield to Maturity")
 ax.set_xlabel("Yield to Maturity (%)")
 ax.set_ylabel("Bond Price")
 ax.grid(True)
+ax.legend()
 
 # Display the plot
 st.pyplot(fig)
