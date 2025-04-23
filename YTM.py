@@ -286,7 +286,12 @@ for ytm in yields:
 if add_curve:
     curve_label = f"{coupon_rate:.2f}% - {coupon_frequency} - {maturity:.1f}y"
     curve_key = f"{uuid.uuid4().hex[:5]}"
-    st.session_state.curves[curve_key] = (yields * 100, prices, curve_label)
+    
+    # Convert numpy arrays to lists to ensure they're serializable
+    x_values = (yields * 100).tolist()
+    y_values = prices
+    
+    st.session_state.curves[curve_key] = (x_values, y_values, curve_label)
     
     # Assign a color from our palette
     colors = get_colors()
