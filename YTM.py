@@ -3,6 +3,7 @@ import numpy as np
 import plotly.graph_objects as go
 import uuid
 import pandas as pd
+import pandas as pd
 
 # Set the page layout to wide and add a custom title/icon
 st.set_page_config(
@@ -389,6 +390,47 @@ with col2:
     )
     
     st.plotly_chart(fig, use_container_width=True)
+    
+    # Add a table showing the current bond's price-yield data
+    with st.expander("📊 View Price-Yield Data Table", expanded=False):
+        # Create a dataframe with sample points (not all points to keep the table manageable)
+        sample_indices = np.linspace(0, len(yields)-1, min(20, len(yields))).astype(int)
+        sample_yields = [yields[i] * 100 for i in sample_indices]
+        sample_prices = [prices[i] for i in sample_indices]
+        
+        price_data = pd.DataFrame({
+            "Yield to Maturity (%)": sample_yields,
+            "Bond Price (€)": sample_prices
+        })
+        
+        # Format the dataframe
+        price_data["Yield to Maturity (%)"] = price_data["Yield to Maturity (%)"].round(2)
+        price_data["Bond Price (€)"] = price_data["Bond Price (€)"].round(2)
+        
+        # Apply styling to the table
+        def highlight_premium_discount(val):
+            if val > face_value:
+                return 'background-color: rgba(52, 211, 153, 0.2); color: #047857'  # Green for premium
+            elif val < face_value:
+                return 'background-color: rgba(252, 165, 165, 0.2); color: #B91C1C'  # Red for discount
+            else:
+                return 'background-color: rgba(96, 165, 250, 0.2); color: #1E40AF'  # Blue for par
+        
+        styled_table = price_data.style.format({
+            "Yield to Maturity (%)": "{:.2f}%",
+            "Bond Price (€)": "€{:.2f}"
+        }).applymap(highlight_premium_discount, subset=["Bond Price (€)"])
+        
+        st.write(f"### Price-Yield Data for {coupon_rate:.2f}% {coupon_frequency} Bond with {maturity:.1f} Year Maturity")
+        st.dataframe(styled_table, use_container_width=True)
+        
+        st.info("""
+        **Bond Price Classification:**
+        - **Premium Bond** (green): Price > Face Value (€100)
+        - **Par Bond** (blue): Price = Face Value (€100)
+        - **Discount Bond** (red): Price < Face Value (€100)
+        """)
+    
     st.markdown('</div>', unsafe_allow_html=True)
     
     # Educational content
