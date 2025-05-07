@@ -114,6 +114,7 @@ with st.expander("ℹ️ About this tool", expanded=False):
     - The bond price and yield have an inverse relationship
     - As yields increase, bond prices decrease (and vice versa)
     - You can compare multiple bonds with different parameters
+    - You can also use this app to get a better understanding of how a change interest rates affects the price of a bond (duration)
     
     Add curves to compare how different coupon rates and maturities affect the price-yield relationship.
     """)
