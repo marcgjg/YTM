@@ -73,7 +73,7 @@ with col1:
     coupon_rate = st.slider("Coupon Rate (%):", 0.0, 10.0, 2.0, 0.25)
     coupon_frequency = st.selectbox("Coupon Frequency:", ["Annual", "Semi-Annual"])
     maturity = st.slider("Maturity (Years):", 0.5, 30.0, 10.0, 0.5)
-    ytm_range = st.slider("YTM Range (%):", 0.0, 20.0, (0.1, 15.0), 0.1)
+    ytm_range = st.slider("YTM Range (%):", 0.1, 20.0, (0.1, 15.0), 0.1)
     min_ytm, max_ytm = ytm_range
     st.markdown('</div>', unsafe_allow_html=True)
 
@@ -129,9 +129,6 @@ with col2:
     prices = [calculate_bond_price(ytm) for ytm in yields]
 
     fig = go.Figure()
-    fig.add_trace(go.Scatter(x=yields * 100, y=prices, mode='lines',
-        name=f"Current ({coupon_rate:.2f}% - {coupon_frequency} - {maturity:.1f}y)",
-        line=dict(color='#3b82f6', width=2, dash='dash')))
 
     for curve_key, (x_vals, y_vals, label) in st.session_state.curves.items():
         color = st.session_state.curve_colors.get(curve_key, "#1f77b4")
