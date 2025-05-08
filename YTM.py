@@ -28,7 +28,7 @@ with col1:
     coupon_rate = st.slider("Coupon Rate (%):", 0.0, 10.0, 2.0, 0.25)
     coupon_frequency = st.selectbox("Coupon Frequency:", ["Annual", "Semi-Annual"])
     maturity = st.slider("Maturity (Years):", 0.5, 30.0, 10.0, 0.5)
-    min_ytm, max_ytm = st.slider("YTM Range (%):", 0.0, 20.0, (0.1, 15.0), 0.1)
+    min_ytm, max_ytm = st.slider("YTM Range (%):", 0.0, 20.0, (0.0, 15.0), 0.1)
 
     st.subheader("Chart Controls")
     col_add, col_reset = st.columns(2)
