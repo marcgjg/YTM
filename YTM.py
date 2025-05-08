@@ -130,6 +130,16 @@ with col2:
 
     fig = go.Figure()
 
+    # Add the current curve (dashed line, not added to saved curves to avoid duplicate legend)
+    fig.add_trace(go.Scatter(
+        x=yields * 100,
+        y=prices,
+        mode='lines',
+        name=f"Current ({coupon_rate:.2f}% - {coupon_frequency} - {maturity:.1f}y)",
+        line=dict(color='#3b82f6', width=2, dash='dash'),
+        showlegend=True  # Ensure only one legend for current bond
+    ))
+
     for curve_key, (x_vals, y_vals, label) in st.session_state.curves.items():
         color = st.session_state.curve_colors.get(curve_key, "#1f77b4")
         fig.add_trace(go.Scatter(x=x_vals, y=y_vals, mode='lines', name=label,
