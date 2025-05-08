@@ -73,7 +73,7 @@ with col1:
     coupon_rate = st.slider("Coupon Rate (%):", 0.0, 10.0, 2.0, 0.25)
     coupon_frequency = st.selectbox("Coupon Frequency:", ["Annual", "Semi-Annual"])
     maturity = st.slider("Maturity (Years):", 0.5, 30.0, 10.0, 0.5)
-    ytm_range = st.slider("YTM Range (%):", 0.0, 20.0, (0.0, 15.0), 0.1)
+    ytm_range = st.slider("YTM Range (%):", 0.1, 20.0, (0.1, 15.0), 0.1)
     min_ytm, max_ytm = ytm_range
     st.markdown('</div>', unsafe_allow_html=True)
 
@@ -148,7 +148,12 @@ with col2:
     fig.add_shape(type="line", x0=min_ytm, y0=face_value, x1=max_ytm, y1=face_value,
         line=dict(color="rgba(128, 128, 128, 0.5)", width=2, dash="dash"))
 
-    fig.update_layout(title="Bond Price vs Yield to Maturity", xaxis_title="Yield to Maturity (%)",
+    fig.update_layout(title="Bond Price vs Yield to Maturity",
+        xaxis_title="Yield to Maturity (%)",
+        yaxis_title="Bond Price (€)",
+        height=600,
+        font=dict(size=16),
+        legend=dict(orientation="h", yanchor="bottom", y=-0.3, xanchor="center", x=0.5))",
         yaxis_title="Bond Price (€)", height=600)
 
     st.plotly_chart(fig, use_container_width=True)
