@@ -148,21 +148,7 @@ with col2:
     fig.add_shape(type="line", x0=min_ytm, y0=face_value, x1=max_ytm, y1=face_value,
         line=dict(color="rgba(128, 128, 128, 0.5)", width=2, dash="dash"))
 
-    fig.update_layout(
-        title="Bond Price vs Yield to Maturity",
-        xaxis_title="Yield to Maturity (%)",
-        yaxis_title="Bond Price (€)",
-        height=600,
-        font=dict(size=16),
-        margin=dict(l=80, r=80, t=80, b=120),
-        legend=dict(
-            orientation="h",
-            yanchor="bottom",
-            y=-0.3,
-            xanchor="center",
-            x=0.5
         )
-    )
         margin=dict(l=80, r=80, t=80, b=120),
         legend=dict(
             orientation="h",
@@ -224,6 +210,22 @@ with col2:
         font=dict(size=16),
         legend=dict(orientation="h", yanchor="bottom", y=-0.3, xanchor="center", x=0.5))",
         yaxis_title="Bond Price (€)", height=600)
+
+    fig.update_layout(
+        title="Bond Price vs Yield to Maturity",
+        xaxis_title="Yield to Maturity (%)",
+        yaxis_title="Bond Price (€)",
+        height=600,
+        font=dict(size=16),
+        margin=dict(l=80, r=80, t=80, b=120),
+        legend=dict(
+            orientation="h",
+            yanchor="bottom",
+            y=-0.3,
+            xanchor="center",
+            x=0.5
+        )
+    )
 
     st.plotly_chart(fig, use_container_width=True)
 
