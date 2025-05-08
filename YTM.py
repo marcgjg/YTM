@@ -162,6 +162,27 @@ with col2:
             xanchor="center",
             x=0.5
         )
+    )
+        margin=dict(l=80, r=80, t=80, b=120),
+        legend=dict(
+            orientation="h",
+            yanchor="bottom",
+            y=-0.3,
+            xanchor="center",
+            x=0.5
+        )
+    ),
+        yaxis_title="Bond Price (€)",
+        height=600,
+        font=dict(size=16),
+        margin=dict(l=80, r=80, t=80, b=120),
+        legend=dict(
+            orientation="h",
+            yanchor="bottom",
+            y=-0.3,
+            xanchor="center",
+            x=0.5
+        )
     )",
         yaxis_title="Bond Price (€)",
         height=600,
