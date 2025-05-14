@@ -14,7 +14,15 @@ st.set_page_config(
 def get_colors():
     return ['#1f77b4', '#ff7f0e', '#2ca02c', '#d62728', '#9467bd', '#8c564b', '#e377c2', '#7f7f7f', '#bcbd22', '#17becf']
 
+# Custom header with logo/title
 st.markdown('<h1 style="text-align: center; color: #1E3A8A;">📈 Bond Price vs Yield to Maturity</h1>', unsafe_allow_html=True)
+
+# Add a description
+with st.expander("ℹ️ About this tool", expanded=False):
+    st.markdown("""
+    This tool helps you visualize the relationship between the **Yield to Maturity (YTM) of a bond** and its **price**. You can also use this tool to compare
+    interest rate risk (duration) of i) bonds with the same coupon rate but different maturities or ii) bonds with the same maturity but different coupon rates.
+    """)
 
 if 'curves' not in st.session_state:
     st.session_state.curves = {}
