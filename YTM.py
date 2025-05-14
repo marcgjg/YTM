@@ -21,8 +21,8 @@ st.markdown('<h1 style="text-align: center; color: #1E3A8A;">📈 Bond Price vs 
 with st.expander("ℹ️ About this tool", expanded=False):
     st.markdown("""
     This tool can be used in two different ways:
-    - It can help you visualize the negative or inverse relationship between the **Yield to Maturity (YTM)**  of a bond and its **price**.
-    - You can also use this tool to compare the **interest rate risk** or **duration** of i) bonds with the same coupon rate but different maturities or ii) bonds with the same maturity but different coupon rates.
+    - It can help you visualize the negative or inverse relationship between the **Yield to Maturity (YTM)**  of a bond and its **Price**.
+    - You can also use this tool to compare the **Interest Rate Risk** or **Duration** of i) bonds with the same coupon rate but different maturities or ii) bonds with the same maturity but different coupon rates.
     """)
 
 if 'curves' not in st.session_state:
