@@ -20,7 +20,7 @@ st.markdown('<h1 style="text-align: center; color: #1E3A8A;">📈 Bond Price vs 
 # Add a description
 with st.expander("ℹ️ About this tool", expanded=False):
     st.markdown("""
-    This tool helps you visualize the relationship between the **Yield to Maturity (YTM) of a bond** and its **price**. You can also use this tool to compare
+    This tool helps you visualize the relationship between the **Yield to Maturity (YTM)**  of a bond and its **price**. You can also use this tool to compare
     interest rate risk (duration) of i) bonds with the same coupon rate but different maturities or ii) bonds with the same maturity but different coupon rates.
     """)
 
