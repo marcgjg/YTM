@@ -17,10 +17,10 @@ st.set_page_config(
 
 
 
-# Now you can use other Streamlit commands
 memory = psutil.virtual_memory()
 st.metric("Used Memory", f"{memory.used / (1024.0 ** 2):.2f} MB")
-
+st.metric("Available Memory", f"{memory.available / (1024.0 ** 2):.2f} MB")
+st.metric("Memory Utilization", f"{memory.percent}%")
 
 
 
