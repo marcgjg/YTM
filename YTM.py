@@ -136,4 +136,4 @@ with col2:
     price_data = pd.DataFrame({"Yield to Maturity (%)": specific_yields * 100, "Bond Price (€)": np.round(specific_prices, 2)})
     st.dataframe(price_data, use_container_width=True)
 
-st.markdown('<div class="footer">Bond Price vs Yield to Maturity Calculator | For educational purposes</div>', unsafe_allow_html=True)
+st.markdown('<div class="footer">Bond Price vs Yield to Maturity Calculator | Developed by Prof. Marc Goergen with the help of ChatGPT,Perplexity and Claude </div>', unsafe_allow_html=True)
