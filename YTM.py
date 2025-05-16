@@ -17,18 +17,6 @@ st.set_page_config(
 
 
 
-
-import streamlit as st
-import psutil  # or other libraries
-
-# This must be the first Streamlit command!
-st.set_page_config(
-    page_title="My App",
-    page_icon="🚀",
-    layout="wide",
-    initial_sidebar_state="expanded"
-)
-
 # Now you can use other Streamlit commands
 memory = psutil.virtual_memory()
 st.metric("Used Memory", f"{memory.used / (1024.0 ** 2):.2f} MB")
