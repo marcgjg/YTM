@@ -5,8 +5,6 @@ import uuid
 import pandas as pd
 
 
-import psutil
-
 
 st.set_page_config(
     page_title="Bond YTM Calculator",
@@ -14,15 +12,6 @@ st.set_page_config(
     layout="wide",
     initial_sidebar_state="expanded"
 )
-
-
-
-memory = psutil.virtual_memory()
-st.metric("Used Memory", f"{memory.used / (1024.0 ** 2):.2f} MB")
-st.metric("Available Memory", f"{memory.available / (1024.0 ** 2):.2f} MB")
-st.metric("Memory Utilization", f"{memory.percent}%")
-
-
 
 
 def get_colors():
