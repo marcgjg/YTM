@@ -110,7 +110,10 @@ with col2:
     )
 
     fig.update_layout(
-        title="Bond Price vs Yield to Maturity",
+        title=dict(
+            text="Bond Price vs Yield to Maturity",
+            font=dict(size=28)
+        ),
         xaxis_title="Yield to Maturity (%)",
         yaxis_title="Bond Price (€)",
         height=600,
