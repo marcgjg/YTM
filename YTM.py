@@ -115,7 +115,7 @@ with col2:
         yanchor="middle",
         y=0.5,
         xanchor="left",
-        x=1.02,
+        x=1.01,
         font=dict(size=12)
         )
     )
