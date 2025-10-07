@@ -82,7 +82,6 @@ with col1:
     st.metric("Duration @ 5% YTM", f"{duration:.2f} years")
 
 with col2:
-    st.subheader("Bond Price vs Yield Curve")
     yields = np.linspace(min_ytm / 100, max_ytm / 100, num_points)
     prices = [calculate_bond_price(ytm) for ytm in yields]
 
