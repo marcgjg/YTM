@@ -56,6 +56,7 @@ with col1:
     if reset_button:
         st.session_state.curves = {}
         st.session_state.curve_colors = {}
+        st.rerun()
 
     st.subheader("Current Bond Analysis")
     periods_per_year = 1 if coupon_frequency == "Annual" else 2
@@ -86,57 +87,70 @@ with col2:
     prices = [calculate_bond_price(ytm) for ytm in yields]
 
     fig = go.Figure()
-#    fig.add_trace(go.Scatter(
-#        x=yields * 100,
-#        y=prices,
-#        mode='lines',
-#        name=f"Current ({coupon_rate:.2f}% - {coupon_frequency} - {maturity:.1f}y)",
-#        line=dict(color='#3b82f6', width=2, dash='dash')
-#    ))
-
+    
+    # Add all saved curves from session state
     for curve_key, (x_vals, y_vals, label) in st.session_state.curves.items():
         color = st.session_state.curve_colors.get(curve_key, "#1f77b4")
-        fig.add_trace(go.Scatter(x=x_vals, y=y_vals, mode='lines', name=label,
-            line=dict(color=color, width=3)))
+        fig.add_trace(go.Scatter(
+            x=x_vals, 
+            y=y_vals, 
+            mode='lines', 
+            name=label,
+            line=dict(color=color, width=3)
+        ))
 
-    fig.add_shape(type="line", x0=min_ytm, y0=face_value, x1=max_ytm, y1=face_value,
-        line=dict(color="rgba(128, 128, 128, 0.5)", width=2, dash="dash"))
-
+    # Add face value reference line
+    fig.add_shape(
+        type="line", 
+        x0=min_ytm, 
+        y0=face_value, 
+        x1=max_ytm, 
+        y1=face_value,
+        line=dict(color="rgba(128, 128, 128, 0.5)", width=2, dash="dash")
+    )
 
     fig.update_layout(
-    title="Bond Price vs Yield to Maturity",
-    xaxis_title="Yield to Maturity (%)",
-    yaxis_title="Bond Price (€)",
-    height=600,
-    font=dict(size=16),
-    margin=dict(l=80, r=280, t=80, b=80),  # Increased from 200 to 280
-    legend=dict(
-        orientation="v",
-        yanchor="middle",
-        y=0.5,
-        xanchor="left",
-        x=1.01,
-        font=dict(size=12),
-        itemwidth=30  # Add this to prevent text truncation
+        title="Bond Price vs Yield to Maturity",
+        xaxis_title="Yield to Maturity (%)",
+        yaxis_title="Bond Price (€)",
+        height=600,
+        font=dict(size=16),
+        margin=dict(l=80, r=300, t=80, b=80),
+        legend=dict(
+            orientation="v",
+            yanchor="middle",
+            y=0.5,
+            xanchor="left",
+            x=1.01,
+            font=dict(size=12),
+            itemwidth=50,
+            bgcolor="rgba(255, 255, 255, 0.8)",
+            bordercolor="rgba(0, 0, 0, 0.2)",
+            borderwidth=1
         )
     )
-            
+
     st.plotly_chart(fig, use_container_width=True)
 
+    # Handle add curve button (after displaying the chart)
     if add_curve:
         curve_label = f"{coupon_rate:.2f}% - {coupon_frequency} - {maturity:.1f}y"
-        curve_key = f"{uuid.uuid4().hex[:5]}"
+        curve_key = f"{uuid.uuid4().hex[:8]}"
         x_values = (yields * 100).tolist()
         y_values = prices
         st.session_state.curves[curve_key] = (x_values, y_values, curve_label)
         color_idx = len(st.session_state.curve_colors) % len(get_colors())
         st.session_state.curve_colors[curve_key] = get_colors()[color_idx]
         st.success(f"Added bond: {curve_label}")
+        st.rerun()
 
     st.subheader("Bond Prices at Selected Yields")
     specific_yields = np.arange(0, 20.5, 0.5) / 100
     specific_prices = [calculate_bond_price(ytm) for ytm in specific_yields]
-    price_data = pd.DataFrame({"Yield to Maturity (%)": specific_yields * 100, "Bond Price (€)": np.round(specific_prices, 2)})
+    price_data = pd.DataFrame({
+        "Yield to Maturity (%)": specific_yields * 100, 
+        "Bond Price (€)": np.round(specific_prices, 2)
+    })
     st.dataframe(price_data, use_container_width=True)
 
 st.markdown('<div class="footer">Bond Price vs Yield to Maturity Calculator | Developed by Prof. Marc Goergen with the help of ChatGPT, Perplexity and Claude</div>', unsafe_allow_html=True)
