@@ -96,7 +96,7 @@ with col2:
             y=y_vals, 
             mode='lines', 
             name=label,
-            line=dict(color=color, width=3)
+            line=dict(color=color, width=4)
         ))
 
     # Add face value reference line
@@ -106,24 +106,35 @@ with col2:
         y0=face_value, 
         x1=max_ytm, 
         y1=face_value,
-        line=dict(color="rgba(128, 128, 128, 0.5)", width=2, dash="dash")
+        line=dict(color="rgba(128, 128, 128, 0.5)", width=3, dash="dash")
     )
 
     fig.update_layout(
-        title="Bond Price vs Yield to Maturity",
+        title=dict(
+            text="Bond Price vs Yield to Maturity",
+            font=dict(size=28)
+        ),
         xaxis_title="Yield to Maturity (%)",
         yaxis_title="Bond Price (€)",
+        xaxis=dict(
+            titlefont=dict(size=22),
+            tickfont=dict(size=18)
+        ),
+        yaxis=dict(
+            titlefont=dict(size=22),
+            tickfont=dict(size=18)
+        ),
         height=600,
         width=1400,
-        font=dict(size=16),
-        margin=dict(l=80, r=350, t=80, b=80),
+        font=dict(size=20),
+        margin=dict(l=100, r=350, t=100, b=80),
         legend=dict(
             orientation="v",
             yanchor="middle",
             y=0.5,
             xanchor="left",
             x=1.01,
-            font=dict(size=11),
+            font=dict(size=18),
             bgcolor="rgba(255, 255, 255, 0.8)",
             bordercolor="rgba(0, 0, 0, 0.2)",
             borderwidth=1
@@ -136,7 +147,7 @@ with col2:
             'filename': 'bond_ytm_chart',
             'height': 800,
             'width': 1600,
-            'scale': 3
+            'scale': 2
         }
     })
 
