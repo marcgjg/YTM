@@ -134,7 +134,7 @@ with col2:
 
     # Handle add curve button (after displaying the chart)
     if add_curve:
-        curve_label = f"{coupon_rate:.2f}% - {coupon_frequency} - {maturity:.1f}y"
+        curve_label = f"{coupon_rate:.2f}% - {coupon_frequency} - {maturity:.1f}y     "
         curve_key = f"{uuid.uuid4().hex[:8]}"
         x_values = (yields * 100).tolist()
         y_values = prices
