@@ -117,6 +117,7 @@ with col2:
         xanchor="left",
         x=1.01,
         font=dict(size=12)
+        itemwidth=30  # Add this to prevent text truncation
         )
     )
             
