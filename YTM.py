@@ -114,13 +114,13 @@ with col2:
             text="Bond Price vs Yield to Maturity",
             font=dict(size=28)
         ),
-        xaxis_title="Yield to Maturity (%)",
-        yaxis_title="Bond Price (€)",
         xaxis=dict(
+            title="Yield to Maturity (%)",
             titlefont=dict(size=22),
             tickfont=dict(size=18)
         ),
         yaxis=dict(
+            title="Bond Price (€)",
             titlefont=dict(size=22),
             tickfont=dict(size=18)
         ),
