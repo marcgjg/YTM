@@ -110,20 +110,9 @@ with col2:
     )
 
     fig.update_layout(
-        title=dict(
-            text="Bond Price vs Yield to Maturity",
-            font=dict(size=28)
-        ),
-        xaxis=dict(
-            title="Yield to Maturity (%)",
-            titlefont=dict(size=22),
-            tickfont=dict(size=18)
-        ),
-        yaxis=dict(
-            title="Bond Price (€)",
-            titlefont=dict(size=22),
-            tickfont=dict(size=18)
-        ),
+        title="Bond Price vs Yield to Maturity",
+        xaxis_title="Yield to Maturity (%)",
+        yaxis_title="Bond Price (€)",
         height=600,
         width=1400,
         font=dict(size=20),
@@ -140,6 +129,10 @@ with col2:
             borderwidth=1
         )
     )
+    
+    # Update axis font sizes separately
+    fig.update_xaxes(title_font=dict(size=22), tickfont=dict(size=18))
+    fig.update_yaxes(title_font=dict(size=22), tickfont=dict(size=18))
 
     st.plotly_chart(fig, use_container_width=True, config={
         'toImageButtonOptions': {
