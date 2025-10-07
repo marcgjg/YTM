@@ -109,18 +109,17 @@ with col2:
     yaxis_title="Bond Price (€)",
     height=600,
     font=dict(size=16),
-    margin=dict(l=80, r=80, t=80, b=150),  # Increased from 120 to 150
+    margin=dict(l=80, r=200, t=80, b=80),  # Increased right margin
     legend=dict(
-        orientation="h",
-        yanchor="bottom",
-        y=-0.35,  # Moved further down from -0.3
-        xanchor="center",
-        x=0.5,
-        font=dict(size=12),  # Smaller font for legend
-        tracegroupgap=10  # Add spacing between legend items
+        orientation="v",  # Changed to vertical
+        yanchor="middle",
+        y=0.5,
+        xanchor="left",
+        x=1.02,  # Position to the right of the plot
+        font=dict(size=12)
         )
     )
-        
+            
     st.plotly_chart(fig, use_container_width=True)
 
     if add_curve:
