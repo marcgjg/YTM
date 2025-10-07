@@ -109,13 +109,13 @@ with col2:
     yaxis_title="Bond Price (€)",
     height=600,
     font=dict(size=16),
-    margin=dict(l=80, r=200, t=80, b=80),  # Increased right margin
+    margin=dict(l=80, r=250, t=80, b=80),  # Increased from 200 to 250
     legend=dict(
-        orientation="v",  # Changed to vertical
+        orientation="v",
         yanchor="middle",
         y=0.5,
         xanchor="left",
-        x=1.02,  # Position to the right of the plot
+        x=1.02,
         font=dict(size=12)
         )
     )
