@@ -130,7 +130,15 @@ with col2:
         )
     )
 
-    st.plotly_chart(fig, use_container_width=True)
+    st.plotly_chart(fig, use_container_width=True, config={
+        'toImageButtonOptions': {
+            'format': 'png',
+            'filename': 'bond_ytm_chart',
+            'height': 800,
+            'width': 1600,
+            'scale': 3
+        }
+    })
 
     # Handle add curve button (after displaying the chart)
     if add_curve:
