@@ -69,9 +69,13 @@ with col1:
                face_value / (1 + yield_rate / periods_per_year) ** n_periods
 
     def calculate_duration(yield_rate):
-        pv_payments = [coupon_payment / (1 + yield_rate / periods_per_year) ** t for t in range(1, n_periods + 1)]
-        pv_payments.append(face_value / (1 + yield_rate / periods_per_year) ** n_periods)
-        weighted_times = [t * payment / periods_per_year for t, payment in enumerate(pv_payments, 1)]
+        # Build the cash flow at each period; the final period's cash flow
+        # includes both the last coupon AND the face value (redemption),
+        # since both occur at the same point in time (t = n_periods).
+        cash_flows = [coupon_payment] * n_periods
+        cash_flows[-1] += face_value
+        pv_payments = [cf / (1 + yield_rate / periods_per_year) ** t for t, cf in enumerate(cash_flows, 1)]
+        weighted_times = [t * pv / periods_per_year for t, pv in enumerate(pv_payments, 1)]
         return sum(weighted_times) / sum(pv_payments)
 
     current_price = calculate_bond_price(current_ytm / 100)
