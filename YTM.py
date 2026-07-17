@@ -45,9 +45,9 @@ with col1:
     st.subheader("Chart Controls")
     col_add, col_reset = st.columns(2)
     with col_add:
-        add_curve = st.button("➕ Add to Chart", use_container_width=True)
+        add_curve = st.button("➕ Add to Chart", width='stretch')
     with col_reset:
-        reset_button = st.button("🔄 Reset Chart", use_container_width=True)
+        reset_button = st.button("🔄 Reset Chart", width='stretch')
 
     resolution = st.select_slider("Chart Resolution:", ["Low", "Medium", "High", "Very High"], value="Medium")
     resolution_points = {"Low": 100, "Medium": 250, "High": 500, "Very High": 1000}
@@ -140,7 +140,7 @@ with col2:
     fig.update_xaxes(title_font=dict(size=22), tickfont=dict(size=18))
     fig.update_yaxes(title_font=dict(size=22), tickfont=dict(size=18))
 
-    st.plotly_chart(fig, use_container_width=True, config={
+    st.plotly_chart(fig, width='stretch', config={
         'toImageButtonOptions': {
             'format': 'png',
             'filename': 'bond_ytm_chart',
@@ -169,6 +169,8 @@ with col2:
         "Yield to Maturity (%)": specific_yields * 100, 
         "Bond Price (€)": np.round(specific_prices, 2)
     })
-    st.dataframe(price_data, use_container_width=True)
+    st.dataframe(price_data, width='stretch')
 
 st.markdown('<div class="footer">Bond Price vs Yield to Maturity Calculator | Developed by Prof. Marc Goergen with the help of ChatGPT, Perplexity and Claude</div>', unsafe_allow_html=True)
+
+# end of file
